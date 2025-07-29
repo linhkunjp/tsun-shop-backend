@@ -1,5 +1,7 @@
 const AuthDB = require("../model/auth");
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+dotenv.config();
 const { mergeCarts } = require("../services/cartService");
 
 // Tạo token
