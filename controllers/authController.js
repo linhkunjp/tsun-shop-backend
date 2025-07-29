@@ -85,9 +85,10 @@ const authController = {
         token: createToken(user),
       });
     } catch (err) {
+      console.error("Lỗi khi login:", err);
       res.status(500).json({
         isSuccess: false,
-        message: "Lỗi hệ thống, vui lòng thử lại sau",
+        message: err || "Lỗi hệ thống, vui lòng thử lại sau",
       });
     }
   },
