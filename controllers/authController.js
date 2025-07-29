@@ -5,6 +5,7 @@ const { mergeCarts } = require("../services/cartService");
 // Tạo token
 const createToken = (user) => {
   // Mã hóa thông tin user thành token
+  console.log("JWT_SECRET value:", process.env.JWT_SECRET);
   return jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "7d",
   });
@@ -89,7 +90,7 @@ const authController = {
         isSuccess: false,
         data: {
           jwt: process.env.JWT_SECRET,
-          err: err,
+          err: err.message,
         },
         message: err || "Lỗi hệ thống, vui lòng thử lại sau",
       });
