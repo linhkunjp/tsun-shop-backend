@@ -8,7 +8,7 @@ const cartController = {
       if (!results) {
         return res
           .status(404)
-          .json({ isSuccess: false, error: "Cart not found" });
+          .json({ isSuccess: false, error: "Giỏ hàng trống" });
       }
       res.status(200).json({ isSuccess: true, results: results });
     } catch (err) {
@@ -53,7 +53,9 @@ const cartController = {
   clearCart: async (req, res) => {
     try {
       await CartDB.findOneAndDelete({ userId: req.params.userId });
-      res.status(200).json({ isSuccess: true, message: "Cart cleared" });
+      res
+        .status(200)
+        .json({ isSuccess: true, message: "Xóa giỏ hàng thành công" });
     } catch (err) {
       res.status(500).json({ isSuccess: false, message: err.message });
     }
@@ -69,7 +71,7 @@ const cartController = {
       if (!cart) {
         return res
           .status(404)
-          .json({ isSuccess: false, message: "Cart not found" });
+          .json({ isSuccess: false, message: "Giỏ hàng trống" });
       }
 
       cart.items = cart.items.filter((item) => item._id.toString() !== itemId);
@@ -89,7 +91,10 @@ const cartController = {
     if (!userId || !Array.isArray(items)) {
       return res
         .status(400)
-        .json({ isSuccess: false, message: "Invalid request body" });
+        .json({
+          isSuccess: false,
+          message: "Có lỗi xảy ra, vui lòng thử lại sau",
+        });
     }
 
     try {

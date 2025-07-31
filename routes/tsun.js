@@ -2,6 +2,7 @@ const router = require("express").Router();
 const productController = require("../controllers/productController");
 const cartController = require("../controllers/cartController");
 const authController = require("../controllers/authController");
+const orderController = require("../controllers/orderController");
 
 // Get product list
 router.get("/collections", productController.getAllProduct);
@@ -32,5 +33,8 @@ router.post("/auth/register", authController.registerUser);
 
 // Login
 router.post("/auth/login", authController.loginUser);
+
+// Create order
+router.post("/orders", orderController.createOrder);
 
 module.exports = router;
